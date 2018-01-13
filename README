@@ -1,1 +1,6 @@
-'TODO: Add contents for README' 
+Sudoku game using java
+
+Requirements:-
+      Java 
+      OpenJDK 8:
+                URL:-https://developers.redhat.com/products/openjdk/download/
