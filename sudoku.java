@@ -31,7 +31,7 @@ class sudoku
     }
     static int check_present(int m,int n,int k)
     {
-        int i,j;
+        int i,j,b_m,b_n;
         for(j=0;j<9;j++)//Check row
         {
             if(grid[m][j]==k)
@@ -41,6 +41,15 @@ class sudoku
         {
             if(grid[i][n]==k)
                 return 1;
+        }
+        b_m=m/3;b_n=n/3;
+        for(i=b_m*3;i<(b_m*3)+3;i++)//Check sub-square
+        {
+            for(j=b_n*3;j<(b_n*3)+3;j++)
+            {
+                if(grid[i][j]==k)
+                    return 1;
+            }
         }
         return 0;
     }
@@ -64,29 +73,23 @@ class sudoku
         int i,j,k,m,flag;
         for(i=0;i<9;i++)
         {
-            loop_j:for(j=0;j<9;j++)
+            for(j=0;j<9;j++)
             {
                 k=rand.nextInt(9) + 1;
                 tried(k);
                 flag=0;
                 if(l==9)
                 {
-                    //System.out.print(k+"Invalid \n");
                     clr_used();
                     clr_grid_row(i);
-                    //grid_print();
                     i--;
-                    break loop_j;
+                    break;
                 }
-                if(check_present(i,j,k)==1)
-                {
-                    flag=1;
-                }
+                flag=check_present(i,j,k);
                 if(flag!=1)
                 {
                     grid[i][j]=k;
                     clr_used();
-                    //System.out.print(grid[i][j]+" ");
                 }
                 else
                     j--;
