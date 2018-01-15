@@ -2,8 +2,33 @@
 class sudoku
 {
     static int grid[][]=new int[9][9];
-    static int l=0;
+    static int l=0,r=0;
     static int used[]=new int[9];
+    static int removed[]=new int[81];
+    static void create_questions()
+    {
+        int x,y,flag;
+        Random rand = new Random();
+        while(r<60)
+        {
+            flag=0;
+            x=rand.nextInt(9);
+            y=rand.nextInt(9);
+            for(int i=0;i<76;i++)
+            {
+                if(removed[i]==(x*10)+y)
+                {
+                    flag=1;break;
+                }
+            }
+            if(flag!=1)
+            {
+                removed[r]=(x*10)+y;
+                //System.out.print(r+" ");
+                r++;grid[x][y]=0;
+            }
+        }
+    }
     static void clr_grid_row(int m)
     {
         for(int i=0;i<9;i++)
@@ -62,7 +87,10 @@ class sudoku
             System.out.print("\n|");
             for(j=0;j<9;j++)
             {
-                System.out.format("%3d|",grid[i][j]);
+                if(grid[i][j]==0)
+                    System.out.print("   |");
+                else
+                    System.out.format("%3d|",grid[i][j]);
             }
             System.out.print("\n --- --- --- --- ---  --- --- --- ---");
         }
@@ -95,6 +123,7 @@ class sudoku
                     j--;
             }
         }
+        create_questions();
         grid_print();
     }
 }
