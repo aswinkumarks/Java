@@ -1,20 +1,28 @@
- import java.util.Random;
+import java.util.*;
 class sudoku
 {
     static int grid[][]=new int[9][9];
-    static int l=0,r=0;
+    static int ques[][]=new int[9][9];
+    //static LinkedList number = new LinkedList();
+    static int l=0,q=0;
     static int used[]=new int[9];
-    static int removed[]=new int[81];
+    static int removed[]=new int[20];
+   /* static void ins_ele()
+    {
+        for(int i=1;i<10;i++)
+            number.add(i);
+        q=9;
+    }*/
     static void create_questions()
     {
-        int x,y,flag;
+        int x,y,flag,r=0;
         Random rand = new Random();
-        while(r<60)
+        while(r<15)
         {
             flag=0;
             x=rand.nextInt(9);
             y=rand.nextInt(9);
-            for(int i=0;i<76;i++)
+            for(int i=0;i<20;i++)
             {
                 if(removed[i]==(x*10)+y)
                 {
@@ -25,7 +33,7 @@ class sudoku
             {
                 removed[r]=(x*10)+y;
                 //System.out.print(r+" ");
-                r++;grid[x][y]=0;
+                r++;ques[x][y]=grid[x][y];
             }
         }
     }
@@ -78,7 +86,7 @@ class sudoku
         }
         return 0;
     }
-    static void grid_print()
+    static void grid_print(int grid[][])
     {
         int i,j;
         System.out.print(" --- --- --- --- --- --- --- --- --- ");
@@ -101,14 +109,17 @@ class sudoku
         int i,j,k,m,flag;
         for(i=0;i<9;i++)
         {
+            //ins_ele();
             for(j=0;j<9;j++)
             {
-                k=rand.nextInt(9) + 1;
+                k=rand.nextInt(9)+1;
+                //k=(int)number.get(m);
                 tried(k);
                 flag=0;
                 if(l==9)
                 {
                     clr_used();
+                    System.out.println("Hailkndf");
                     clr_grid_row(i);
                     i--;
                     break;
@@ -117,15 +128,17 @@ class sudoku
                 if(flag!=1)
                 {
                     grid[i][j]=k;
+                    //grid_print(grid);
+                    //number.remove(m);q--;
                     clr_used();
                 }
                 else
                     j--;
             }
         }
-        grid_print();
+        grid_print(grid);
         System.out.println("");
-        //create_questions();
-        //grid_print();
+        create_questions();
+        grid_print(ques);
     }
 }
