@@ -57,12 +57,12 @@ class sudoku
     static int check_present(int m,int n,int k)
     {
         int i,j,b_m,b_n;
-        for(j=0;j<9;j++)//Check row
+        for(j=0;j<n;j++)//Check row
         {
             if(grid[m][j]==k)
                 return 1;
         }
-        for(i=0;i<9;i++)//Check column
+        for(i=0;i<m;i++)//Check column
         {
             if(grid[i][n]==k)
                 return 1;
@@ -123,7 +123,9 @@ class sudoku
                     j--;
             }
         }
-        create_questions();
         grid_print();
+        System.out.println("");
+        //create_questions();
+        //grid_print();
     }
 }
