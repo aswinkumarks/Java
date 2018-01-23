@@ -6,7 +6,7 @@ class sudoku
     //static LinkedList number = new LinkedList();
     static int l=0,q=0;
     static int used[]=new int[9];
-    static int removed[]=new int[20];
+    static int removed[]=new int[25];
    /* static void ins_ele()
     {
         for(int i=1;i<10;i++)
@@ -17,7 +17,7 @@ class sudoku
     {
         int x,y,flag,r=0;
         Random rand = new Random();
-        while(r<15)
+        while(r<18)
         {
             flag=0;
             x=rand.nextInt(9);
@@ -109,17 +109,14 @@ class sudoku
         int i,j,k,m,flag;
         for(i=0;i<9;i++)
         {
-            //ins_ele();
             for(j=0;j<9;j++)
             {
                 k=rand.nextInt(9)+1;
-                //k=(int)number.get(m);
                 tried(k);
                 flag=0;
                 if(l==9)
                 {
                     clr_used();
-                    System.out.println("Hailkndf");
                     clr_grid_row(i);
                     i--;
                     break;
@@ -128,15 +125,13 @@ class sudoku
                 if(flag!=1)
                 {
                     grid[i][j]=k;
-                    //grid_print(grid);
-                    //number.remove(m);q--;
                     clr_used();
                 }
                 else
                     j--;
             }
         }
-        grid_print(grid);
+        //grid_print(grid);
         System.out.println("");
         create_questions();
         grid_print(ques);
